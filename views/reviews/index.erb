@@ -1,0 +1,17 @@
+<p>Reviews</p>
+
+<%- reviews.each do |review| -%>
+<div>
+  <p><%= review.text %></p>
+  <p>by <%= review.reviewer %></p>
+</div>
+<%- end -%>
+
+<p>Write a review</p>
+<form action="/pubs/<%= pub.id %>/reviews" method="POST">
+  <p><label for="review_reviewer">Reviewer's name <input type="text" name="review[reviewer]" id="review_reviewer"></label></p>
+  <p><label for="review_text">Your review</label></p>
+  <textarea name="review[text]" id="review_text">
+  </textarea>
+  <p><input type="submit" name="submit" value="Add your review"></p>
+</form>

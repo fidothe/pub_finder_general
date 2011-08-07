@@ -1,0 +1,7 @@
+<p>All the pubs</p>
+<ul>
+<%- pubs.each do |pub| -%>
+  <li><a href="/pubs/<%= pub.id %>"><%= pub.name %></a></li>
+<%- end -%>
+</ul>
+<p><a href="/pubs/new">Add a new pub</a></p>
