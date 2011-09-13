@@ -17,6 +17,11 @@ require 'rack/csrf'
 set :sessions, true
 use Rack::Csrf, :raise => true
 
+# need OmniAuth for Twitter sign-in
+require 'oa-oauth'
+
+set :sessions, true
+
 DataMapper.setup(:default, "sqlite://#{File.expand_path('../', __FILE__)}/#{ENV['RACK_ENV']}.sqlite3")
 
 class Pub
@@ -60,6 +65,23 @@ DataMapper.finalize
 
 DataMapper.auto_upgrade! # Will create new tables, and add columns where needed. 
                            # It won't change column constraints or drop columns
+
+# add some stuff for testing
+@pub = Pub.create(
+  :name => "white",
+  :description => "another pub"
+)
+
+@reviewer = Reviewer.create(
+  :twitterid => "laurendw",
+  :name => "my name"
+)
+
+@review = Review.create(
+  :pub_id => 1,
+  :reviewer_id => 1,
+  :text => "my first review of the white pub"
+)
 
 # Now the twitter stuff, filling in CONSUMER_KEY and CONSUMER_SECRET
 
@@ -145,6 +167,11 @@ end
 
 post '/reviewers' do
   @title = "Reviewer list"
+#  erubis :'reviewers/new'
+end
+
+post '/reviewers' do
+  @title = "Add a reviewer"
   reviewer = Reviewer.create(params[:reviewer])
   redirect to("/reviewers/#{reviewer.id}")
 end
