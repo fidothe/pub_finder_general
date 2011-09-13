@@ -1,0 +1,10 @@
+<p>This reviewer's twitter ID is <em><%= reviewer.twitterid %></em> and their (maybe) 
+real name is <em><%= reviewer.name %></em>.</p>
+<p>Contributed reviews:</p>
+<%- reviews.each do |review| -%>
+<div>
+  <p>Review of <%= review.pub.name %> by <%= review.reviewer.twitterid %></p>
+  <p><%= review.text %></p>
+</div>
+<%- end -%>
+

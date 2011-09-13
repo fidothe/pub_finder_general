@@ -6,6 +6,7 @@ gem 'data_mapper'
 gem 'dm-sqlite-adapter'
 gem 'nokogiri'
 gem 'builder'
+gem 'omniauth'
 
 group :development, :test do
   gem 'thin'

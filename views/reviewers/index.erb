@@ -1,0 +1,10 @@
+<p>All the reviewers</p>
+<table>
+<tr><th>Twitter name</th><th>Real name (maybe)</th></tr>
+<%- reviewers.each do |reviewer| -%>
+<tr>
+  <td><a href="/reviewers/<%= reviewer.id %>"><%= reviewer.twitterid %></a> </td>
+<td> <%= reviewer.name %></td></tr>
+<%- end -%>
+</table>
+<p><a href="/reviewers/new">Add a new reviewer</a></p>
