@@ -1,4 +1,4 @@
-<p>All the reviewers</p>
+<h3>All the reviewers</h3>
 <table>
 <tr><th>Twitter name</th><th>Real name (maybe)</th></tr>
 <%- reviewers.each do |reviewer| -%>
@@ -7,4 +7,12 @@
 <td> <%= reviewer.name %></td></tr>
 <%- end -%>
 </table>
+
+<% if @current_reviewer %>
+<p>You are logged in as <%= current_reviewer.twitterid %>. To add a new reviewer, 
+first log out. 
+<a href="/logout">Logout</a></p>
+<% else %>
+<p><a href="/login">Log in</a></p>
 <p><a href="/reviewers/new">Add a new reviewer</a></p>
+<% end %>
