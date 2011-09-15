@@ -149,7 +149,7 @@ get '/reviewers/new' do
 end
 
 post '/reviewers' do
-  @title = "Add a reviewer"
+  @title = "Reviewer list"
   reviewer = Reviewer.create(params[:reviewer])
   redirect to("/reviewers/#{reviewer.id}")
 end
