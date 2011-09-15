@@ -8,10 +8,10 @@
 <%- end -%>
 </table>
 
-<% if @current_reviewer %>
+<% if current_reviewer %>
 <p>You are logged in as <%= current_reviewer.twitterid %>. To add a new reviewer, 
-first log out. 
-<a href="/logout">Logout</a></p>
+first <a href="/logout">log out</a> of the pub_finder app, then 
+<a href = "https://twitter.com/#">log out of Twitter</a>.</p>
 <% else %>
 <p><a href="/login">Log in</a></p>
 <p><a href="/reviewers/new">Add a new reviewer</a></p>
