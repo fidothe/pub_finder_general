@@ -57,23 +57,6 @@ DataMapper.finalize
 DataMapper.auto_upgrade! # Will create new tables, and add columns where needed. 
                            # It won't change column constraints or drop columns
 
-# add some stuff for testing
-@pub = Pub.create(
-  :name => "white",
-  :description => "another pub"
-)
-
-@reviewer = Reviewer.create(
-  :twitterid => "laurendw",
-  :name => "my name"
-)
-
-@review = Review.create(
-  :pub_id => 1,
-  :reviewer_id => 1,
-  :text => "my first review of the white pub"
-)
-
 # Now the twitter stuff, filling in CONSUMER_KEY and CONSUMER_SECRET
 
 use OmniAuth::Strategies::Twitter, 'IZXyIwBrkrV9KJXHkYo4HQ', 'dbbAWBA3V52ExlImrYQ9BXGDebcIt4vZQ30C55pNs'
@@ -145,7 +128,6 @@ end
 get '/reviewers/new' do
   @title = "Add a reviewer"
   redirect '/auth/twitter'
-#  erubis :'reviewers/new'
 end
 
 post '/reviewers' do
