@@ -40,16 +40,17 @@ class Review
 
   property :id,          Serial    # An auto-increment integer key
   property :text,        Text
+  property :date,        Date
 
   belongs_to :pub,       :required => true
   belongs_to :reviewer,  :required => true
 end
 
 DataMapper.finalize
-DataMapper.auto_migrate! # Warning - this will wipe out any existing data in tables whose 
+#DataMapper.auto_migrate! # Warning - this will wipe out any existing data in tables whose 
                          # schema has changed. If this scares you, try .auto_upgrade! instead
 
-# DataMapper.auto_upgrade! # Will create new tables, and add columns where needed. 
+ DataMapper.auto_upgrade! # Will create new tables, and add columns where needed. 
                            # It won't change column constraints or drop columns
 
 # Now the twitter stuff, filling in CONSUMER_KEY and CONSUMER_SECRET

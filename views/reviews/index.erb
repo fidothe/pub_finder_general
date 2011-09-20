@@ -1,8 +1,10 @@
 <h3>Reviews</h3>
 
 <%- reviews.each do |review| -%>
-<div>
-  <p>Review of <%= review.pub.name %> by <%= review.reviewer.twitterid %></p>
+<div class="review">
+  <p>Review of <%= review.pub.name %> by <%= review.reviewer.twitterid %>
+     on <%= review.date %>
+  </p>
   <p><%= review.text %></p>
 </div>
 <%- end -%>
@@ -13,7 +15,7 @@
   <p>
   <input type="hidden" name="review[reviewer_id]" id="reviewer_id" 
   value="<%= current_reviewer.id %>"></p>
-  <p><label for="review_text">Your review:</label></p>
+  <p><label for="review_text">Your review:</label> <input type="date" name="date[date]"/></p>
   <textarea name="review[text]" id="review_text">
   </textarea>
   <p><input type="submit" name="submit" value="Add your review"></p>
