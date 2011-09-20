@@ -10,6 +10,7 @@
 <h3>Write a review</h3>
 <p>You are logged in as <%= current_reviewer.twitterid %></p>
 <form action="/pubs/<%= pub.id %>/reviews" method="POST">
+<%= csrf_tag %>
   <p>
   <input type="hidden" name="review[reviewer_id]" id="reviewer_id" 
   value="<%= current_reviewer.id %>"></p>

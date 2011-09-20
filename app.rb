@@ -8,8 +8,11 @@ require 'data_mapper'
 
 # need OmniAuth for Twitter sign-in
 require 'oa-oauth'
+# CSRF attack protection
+require 'rack/csrf'
 
 set :sessions, true
+use Rack::Csrf, :raise => true
 
 DataMapper.setup(:default, "sqlite://#{File.expand_path('../', __FILE__)}/#{ENV['RACK_ENV']}.sqlite3")
 
@@ -60,8 +63,17 @@ helpers do
   def current_reviewer
     @current_reviewer ||= Reviewer.get(session[:reviewer_id]) if session[:reviewer_id]
   end
-end
+  
+  # a couple of helpers for CSRF attack prevention
+  def csrf_token
+    Rack::Csrf.csrf_token(env)
+  end
 
+  def csrf_tag
+    Rack::Csrf.csrf_tag(env)
+  end
+
+end
 
 get '/' do
   @title = "Pub Finder General"
