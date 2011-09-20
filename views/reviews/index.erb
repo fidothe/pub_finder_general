@@ -1,11 +1,9 @@
-<h3>Reviews</h3>
+<h3>Reviews of <%= review.pub.name %></h3>
 
 <%- reviews.each do |review| -%>
-<div class="review">
-  <p>Review of <%= review.pub.name %> by <%= review.reviewer.twitterid %>
-     on <%= review.date %>
-  </p>
-  <p><%= review.text %></p>
+<div>
+  <p>Reviewer: <%= review.reviewer.twitterid %></p>
+  <p><%= review.text %> created at <%=review.created_at %>.</p>
 </div>
 <%- end -%>
 
