@@ -19,8 +19,11 @@ use Rack::Csrf, :raise => true
 
 # need OmniAuth for Twitter sign-in
 require 'oa-oauth'
+# CSRF attack protection
+require 'rack/csrf'
 
 set :sessions, true
+use Rack::Csrf, :raise => true
 
 DataMapper.setup(:default, "sqlite://#{File.expand_path('../', __FILE__)}/#{ENV['RACK_ENV']}.sqlite3")
 
