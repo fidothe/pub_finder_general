@@ -1,5 +1,6 @@
 <h3>Add a new pub</h3>
 <form action="/pubs" method="POST">
+  <%= csrf_tag %>
   <p><label for="pub_name">Pub name <input type="text" name="pub[name]" id="pub_name"></label></p>
   <p><label for="pub_description">Pub description</label></p>
   <textarea name="pub[description]" id="pub_description">

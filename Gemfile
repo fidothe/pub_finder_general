@@ -7,6 +7,7 @@ gem 'dm-sqlite-adapter'
 gem 'nokogiri'
 gem 'builder'
 gem 'omniauth'
+gem 'rack_csrf'
 
 group :development, :test do
   gem 'thin'

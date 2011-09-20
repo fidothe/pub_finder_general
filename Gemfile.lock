@@ -107,6 +107,8 @@ GEM
     rack-openid (1.2.0)
       rack (>= 1.1.0)
       ruby-openid (>= 2.1.8)
+    rack_csrf (2.2.0)
+      rack (>= 0.9)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     ruby-openid (2.1.8)
@@ -134,5 +136,6 @@ DEPENDENCIES
   erubis
   nokogiri
   omniauth
+  rack_csrf
   sinatra
   thin
