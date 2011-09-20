@@ -5,6 +5,7 @@ gem 'erubis'
 gem 'data_mapper'
 gem 'dm-sqlite-adapter'
 gem 'omniauth'
+gem 'rack_csrf'
 
 group :development, :test do
   gem 'thin'
