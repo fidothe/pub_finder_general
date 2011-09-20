@@ -48,6 +48,7 @@ class Review
 
   property :id,          Serial    # An auto-increment integer key
   property :text,        Text
+  property :created_at,  DateTime        
 
   belongs_to :pub,       :required => true
   belongs_to :reviewer,  :required => true
