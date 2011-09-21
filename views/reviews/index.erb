@@ -2,22 +2,22 @@
 
 <%- reviews.each do |review| -%>
 <div class="review">
-  <p>Review of <%= review.pub.name %> by <%= review.reviewer.twitterid %>
-     on <%= review.date %>
-  </p>
+  <p>Review by <%= review.reviewer.twitterid %> on <%= review.date %></p>
   <p><%= review.text %></p>
 </div>
 <%- end -%>
 
 <h3>Write a review</h3>
+
 <p>You are logged in as <%= current_reviewer.twitterid %></p>
+
 <form action="/pubs/<%= pub.id %>/reviews" method="POST">
 <%= csrf_tag %>
-  <p>
-  <input type="hidden" name="review[reviewer_id]" id="reviewer_id" 
-  value="<%= current_reviewer.id %>"></p>
-  <p><label for="review_text">Your review:</label> <input type="date" name="date[date]"/></p>
-  <textarea name="review[text]" id="review_text">
-  </textarea>
-  <p><input type="submit" name="submit" value="Add your review"></p>
+<p>
+<input type="hidden" name="review[reviewer_id]" id="reviewer_id" value="<%= current_reviewer.id %>" />
+<label for="review_date">Review date:</label> <input type="date" name="review[date]" id="review_date"/>
+</p>
+<p><label for="review_text">Your review:</label></p>
+<textarea name="review[text]" id="review_text"></textarea>
+<p><input type="submit" name="submit" value="Add your review"></p>
 </form>
