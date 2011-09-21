@@ -22,6 +22,8 @@ class Pub
   property :id,          Serial    # An auto-increment integer key
   property :name,        String
   property :description, Text
+  property :lat,         Float
+  property :lon,         Float
 
   has n, :reviews
 end
