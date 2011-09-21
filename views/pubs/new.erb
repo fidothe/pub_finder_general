@@ -1,10 +1,11 @@
 <div class="newpub">
 <h3>Add a new pub</h3>
-<form action="/pubs" method="POST">
+<form action="/pubs" method="POST" class="newpub">
   <%= csrf_tag %>
   <p><label for="pub_name">Pub name <input type="text" name="pub[name]" id="pub_name"></label></p>
   <p><label for="pub_description">Pub description</label></p>
 <textarea name="pub[description]" id="pub_description" cols="60" rows="4"></textarea>
   <p><input type="submit" name="submit" value="Add the pub"></p>
+  <p id="geowait">Waiting for geolocation...</p>
 </form>
 </div>
