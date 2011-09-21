@@ -1,0 +1,35 @@
+/* Pub Finder General */
+
+h1 {
+    font-family: sans-serif;
+    font-size: 24pt;
+}
+
+h3 {
+    font-family: sans-serif;
+    font-size: 18pt;
+}
+
+ul {
+    list-style-image: url("glass.png");
+}
+
+a,
+a:visited {
+    color: black;
+}
+
+div.review:nth-child(odd) {
+    background-color: #CCCCCC;
+}
+
+div.review {
+    border-top: 1px solid black;
+}
+
+div.newpub {
+    background-image: url("background.gif");
+    background-repeat: no-repeat;
+    background-position: left top;
+    height: 800px;
+}
