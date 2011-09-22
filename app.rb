@@ -62,7 +62,7 @@ DataMapper.auto_upgrade! # Will create new tables, and add columns where needed.
 
 # Now the twitter stuff, need to fill in CONSUMER_KEY and CONSUMER_SECRET
 
-use OmniAuth::Strategies::Twitter, 'CONSUMER_KEY', 'CONSUMER_SECRET'
+use OmniAuth::Strategies::Twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
 
 helpers do
   def current_reviewer
