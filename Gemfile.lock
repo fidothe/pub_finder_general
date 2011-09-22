@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.2.6)
     bcrypt-ruby (2.1.4)
+    builder (3.0.0)
     daemons (1.1.4)
     data_mapper (1.1.0)
       dm-aggregates (= 1.1.0)
@@ -70,6 +71,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  builder
   data_mapper
   dm-sqlite-adapter
   erubis

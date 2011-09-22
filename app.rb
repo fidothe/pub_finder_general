@@ -4,6 +4,7 @@ Bundler.setup(:default, ENV['RACK_ENV'].to_sym)
 
 require 'sinatra'
 require 'erubis'
+require 'builder'
 require 'data_mapper'
 require 'open-uri'
 require 'nokogiri'
@@ -46,6 +47,11 @@ end
 get '/pubs' do
   pubs = Pub.all
   erubis :'pubs/index', :locals => {:pubs => pubs}
+end
+
+get '/pubs.xml' do
+  pubs = Pub.all
+  builder :'pubs/index', :locals => {:pubs => pubs}
 end
 
 get '/pubs/new' do

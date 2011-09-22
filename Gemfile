@@ -5,6 +5,7 @@ gem 'erubis'
 gem 'data_mapper'
 gem 'dm-sqlite-adapter'
 gem 'nokogiri'
+gem 'builder'
 
 group :development, :test do
   gem 'thin'
