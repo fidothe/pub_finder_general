@@ -48,7 +48,6 @@ class Review
 
   property :id,          Serial    # An auto-increment integer key
   property :text,        Text
-  property :created_at,  DateTime        
 
   belongs_to :pub,       :required => true
   belongs_to :reviewer,  :required => true
@@ -61,9 +60,9 @@ DataMapper.finalize
 DataMapper.auto_upgrade! # Will create new tables, and add columns where needed. 
                            # It won't change column constraints or drop columns
 
-# Now the twitter stuff, filling in CONSUMER_KEY and CONSUMER_SECRET
+# Now the twitter stuff, need to fill in CONSUMER_KEY and CONSUMER_SECRET
 
-use OmniAuth::Strategies::Twitter, 'IZXyIwBrkrV9KJXHkYo4HQ', 'dbbAWBA3V52ExlImrYQ9BXGDebcIt4vZQ30C55pNs'
+use OmniAuth::Strategies::Twitter, 'CONSUMER_KEY', 'CONSUMER_SECRET'
 
 helpers do
   def current_reviewer
