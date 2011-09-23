@@ -4,6 +4,8 @@ gem 'sinatra'
 gem 'erubis'
 gem 'data_mapper'
 gem 'dm-sqlite-adapter'
+gem 'nokogiri'
+gem 'builder'
 gem 'omniauth'
 gem 'rack_csrf'
 

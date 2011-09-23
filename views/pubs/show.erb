@@ -1,3 +1,25 @@
 <h3><%= pub.name %></h3>
 <p><%= pub.description %></p>
 <p><a href="/pubs/<%= pub.id %>/reviews">Reviews</a></p>
+<div id="map-canvas" style="width: 400px; height: 400px;">
+</div>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+$(function() {
+  var latlng = new google.maps.LatLng(51.753177, -1.250081);
+  var myOptions = {
+    zoom: 15,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map($('#map-canvas')[0],
+    myOptions);
+  var the_pub_latlng = new google.maps.LatLng(<%= pub.lat %>,<%= pub.lon %>);
+  var the_pub = new google.maps.Marker({
+    position: the_pub_latlng,
+    map: map,
+    title:"<%= pub.name %>"
+  });
+});
+</script>
+

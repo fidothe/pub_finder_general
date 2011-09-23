@@ -4,7 +4,26 @@ Bundler.setup(:default, ENV['RACK_ENV'].to_sym)
 
 require 'sinatra'
 require 'erubis'
+require 'builder'
 require 'data_mapper'
+require 'open-uri'
+require 'nokogiri'
+
+# need OmniAuth for Twitter sign-in
+require 'oa-oauth'
+# CSRF attack protection
+require 'rack/csrf'
+
+set :sessions, true
+use Rack::Csrf, :raise => true
+
+# need OmniAuth for Twitter sign-in
+require 'oa-oauth'
+# CSRF attack protection
+require 'rack/csrf'
+
+set :sessions, true
+use Rack::Csrf, :raise => true
 
 # need OmniAuth for Twitter sign-in
 require 'oa-oauth'
@@ -22,10 +41,22 @@ class Pub
   property :id,          Serial    # An auto-increment integer key
   property :name,        String
   property :description, Text
-  property :lat,         Float
-  property :lon,         Float
+  property :lat,         String
+  property :lon,         String
 
   has n, :reviews
+end
+
+class Reviewer
+  include DataMapper::Resource
+  
+  property :id,          Serial    # An auto-increment integer key
+  property :uid,         String    # the twitter uid
+  property :twitterid,   String, :required => true # called nickname by twitter
+  property :name,        String    # called name by twitter
+  
+  has n, :reviews
+  
 end
 
 class Reviewer
@@ -45,6 +76,10 @@ class Review
 
   property :id,          Serial    # An auto-increment integer key
   property :text,        Text
+<<<<<<< HEAD
+=======
+  property :created_at,  DateTime        
+>>>>>>> f53fb1270bdbaa8e3aba0f8c5dab1d714f3a6e1b
   property :date,        Date
 
   belongs_to :pub,       :required => true
@@ -55,7 +90,11 @@ DataMapper.finalize
 #DataMapper.auto_migrate! # Warning - this will wipe out any existing data in tables whose 
                          # schema has changed. If this scares you, try .auto_upgrade! instead
 
+<<<<<<< HEAD
  DataMapper.auto_upgrade! # Will create new tables, and add columns where needed. 
+=======
+DataMapper.auto_upgrade! # Will create new tables, and add columns where needed. 
+>>>>>>> f53fb1270bdbaa8e3aba0f8c5dab1d714f3a6e1b
                            # It won't change column constraints or drop columns
 
 # Now the twitter stuff, filling in CONSUMER_KEY and CONSUMER_SECRET
@@ -89,14 +128,28 @@ get '/pubs' do
   erubis :'pubs/index', :locals => {:pubs => pubs}
 end
 
+get '/pubs.xml' do
+  pubs = Pub.all
+  builder :'pubs/index', :locals => {:pubs => pubs}
+end
+
 get '/pubs/new' do
   @title = "Add a pub"
   erubis :'pubs/new'
 end
 
 post '/pubs' do
+<<<<<<< HEAD
   @title = "Add a pub"
   pub = Pub.create(params[:pub])
+=======
+  pub_params = params[:pub]
+  if pub_params[:lat].nil? || pub_params[:lat] == ''
+    pub_params = pub_params.merge(fetch_pub_from_google(pub_params[:name]))
+  end
+  pub = Pub.create(pub_params)
+  @title = "Add a pub"
+>>>>>>> f53fb1270bdbaa8e3aba0f8c5dab1d714f3a6e1b
   redirect to("/pubs/#{pub.id}")
 end
 
@@ -133,6 +186,14 @@ end
 
 post '/reviewers' do
   @title = "Reviewer list"
+<<<<<<< HEAD
+=======
+#  erubis :'reviewers/new'
+end
+
+post '/reviewers' do
+  @title = "Add a reviewer"
+>>>>>>> f53fb1270bdbaa8e3aba0f8c5dab1d714f3a6e1b
   reviewer = Reviewer.create(params[:reviewer])
   redirect to("/reviewers/#{reviewer.id}")
 end
@@ -165,3 +226,30 @@ get '/auth/twitter/callback' do
   session[:reviewer_id] = reviewer.id
   redirect '/'
 end
+<<<<<<< HEAD
+=======
+
+def fetch_pub_from_google(name)
+  starting_lat = '51.753177'
+  starting_lon = '-1.250081'
+
+  params = {
+    location: "#{starting_lat},#{starting_lon}",
+    radius: 1000,
+    sensor: 'false',
+    key: ENV['GAPI_KEY'],
+    name: name,
+    types: 'bar'
+  }
+  qs = Rack::Utils.build_query(params)
+  query_url = "https://maps.googleapis.com/maps/api/place/search/xml?#{qs}"
+
+  results = Nokogiri::XML(open(query_url))
+  pub = results.css('result:first')
+  name = pub.css('name').text
+  lat = pub.css('location lat').text
+  lon = pub.css('location lng').text
+  {name: name, lat: lat, lon: lon}
+end
+
+>>>>>>> f53fb1270bdbaa8e3aba0f8c5dab1d714f3a6e1b
